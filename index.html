@@ -36,6 +36,9 @@
             text-align: center;
             width: 100%;
             max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .title {
@@ -72,6 +75,23 @@
             display: block;
             font-size: 0.8em;
             color: #000; /* Negro como pedido */
+        }
+
+        .qr-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .qr-container p {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .qr-image {
+            width: 150px;
+            height: 150px;
+            border: 2px solid #fff;
+            border-radius: 5px;
         }
 
         /* Animación simple de confeti para toque festivo - solo en rojo como detalle de color */
@@ -115,6 +135,12 @@
                     <span class="label">Segundos</span>
                 </div>
             </div>
+        </div>
+        <div class="qr-container">
+            <p>Escanea el QR para inscribirte:</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjz9bSn1m8dbrjat26cRDvafqfiWLduqR6bP6uyZ6a9UZ0ug/viewform?usp=dialog" target="_blank">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?data=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSdjz9bSn1m8dbrjat26cRDvafqfiWLduqR6bP6uyZ6a9UZ0ug%2Fviewform%3Fusp%3Ddialog&size=150x150" alt="QR Code" class="qr-image">
+            </a>
         </div>
     </div>
 
