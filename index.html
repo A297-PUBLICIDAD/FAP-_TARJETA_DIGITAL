@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Regresiva para la Fiesta de Fin de Año</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .background-image {
+            width: 100%;
+            height: auto;
+            opacity: 0.7; /* Ajusta la opacidad para que el countdown sea visible */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+        }
+
+        .title {
+            font-size: 4em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            color: #fff; /* Blanco para estética B&W */
+        }
+
+        .countdown {
+            font-size: 2em;
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #fff; /* Blanco para estética B&W */
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .time-unit {
+            background: #fff;
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .label {
+            display: block;
+            font-size: 0.8em;
+            color: #000; /* Negro como pedido */
+        }
+
+        /* Animación simple de confeti para toque festivo - solo en rojo como detalle de color */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #FF0000; /* Rojo festivo como único detalle de color */
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Asume que guardas la imagen subida como 'thumbnail.png' en el mismo directorio o sube a GitHub -->
+        <img src="thumbnail.png" alt="En Vivo" class="background-image">
+        
+        <div class="overlay">
+            <h1 class="title">Fiesta de Fin de Año y Cierre de 1er Temporada</h1>
+            <div class="countdown">
+                <div class="timer">
+                    <div class="time-unit">
+                        <span id="days">00</span>
+                        <span class="label">Días</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="hours">00</span>
+                        <span class="label">Horas</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="minutes">00</span>
+                        <span class="label">Minutos</span>
+                    </div>
+                    <div class="time-unit">
+                        <span id="seconds">00</span>
+                        <span class="label">Segundos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confeti festivo (genera varios, solo en rojo como detalle de color) -->
+    <script>
+        function createConfetti() {
+            const colors = ['#FF0000', '#CC0000', '#990000']; // Tonos de rojo para festivo
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                document.body.appendChild(confetti);
+            }
+        }
+        createConfetti();
+    </script>
+
+    <script>
+        // Fecha objetivo: 27 de noviembre de 2025 a las 20:00 hs (UTC-3)
+        const targetDate = new Date('2025-11-27T20:00:00-03:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance < 0) {
+                document.querySelector('.countdown').innerHTML = '<p>¡La fiesta ha comenzado! 🎊</p>';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        // Actualizar cada segundo
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Llamada inicial
+    </script>
+</body>
+</html>
